@@ -1,7 +1,14 @@
-import "./App.css";
+import React, { Component } from "react";
+import Layout from "./components/Layout/Layout";
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <div>
+      <Layout>
+        <p>Hello World!</p>
+      </Layout>
+    </div>
+  );
 }
 
 export default App;
