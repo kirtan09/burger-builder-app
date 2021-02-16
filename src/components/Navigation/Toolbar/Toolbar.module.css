@@ -1,4 +1,4 @@
-.Toolbar {
+.toolbar {
   height: 56px;
   width: 100%;
   position: fixed;
@@ -13,16 +13,16 @@
   z-index: 90;
 }
 
-.Toolbar nav {
+.toolbar nav {
   height: 100%;
 }
 
-.Logo {
+.logo {
   height: 80%;
 }
 
 @media (max-width: 499px) {
-  .DesktopOnly {
+  .desktopOnly {
     display: none;
   }
 }

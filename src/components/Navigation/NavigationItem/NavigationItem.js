@@ -1,9 +1,9 @@
 import React from "react";
-import "./NavigationItem.css";
+import classes from "./NavigationItem.module.css";
 
 const NavigationItem = (props) => (
-  <li className="NavigationItem">
-    <a href={props.link} className={props.active ? "active" : null}>
+  <li className={classes.navigationItem}>
+    <a href={props.link} className={props.active ? classes.active : null}>
       {props.children}
     </a>
   </li>

@@ -1,4 +1,4 @@
-.BuildControls {
+.buildControls {
   width: 100%;
   background-color: #cf8f2e;
   display: flex;
@@ -9,7 +9,7 @@
   padding: 10px 0;
 }
 
-.OrderButton {
+.orderButton {
   background-color: #dad735;
   outline: none;
   cursor: pointer;
@@ -21,21 +21,21 @@
   box-shadow: 2px 2px 2px #966909;
 }
 
-.OrderButton:hover,
-.OrderButton:active {
+.orderButton:hover,
+.orderButton:active {
   background-color: #a0db41;
   border: 1px solid #966909;
   color: #966909;
 }
 
-.OrderButton:disabled {
+.orderButton:disabled {
   background-color: #c7c6c6;
   cursor: not-allowed;
   border: 1px solid #ccc;
   color: #888888;
 }
 
-.OrderButton:not(:disabled) {
+.orderButton:not(:disabled) {
   animation: enable 0.3s linear;
 }
 

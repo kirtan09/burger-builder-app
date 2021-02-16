@@ -1,4 +1,4 @@
-.SideDrawer {
+.sideDrawer {
   position: fixed;
   width: 280px;
   max-width: 70%;
@@ -13,20 +13,20 @@
 }
 
 @media (min-width: 500px) {
-  .SideDrawer {
+  .sideDrawer {
     display: none;
   }
 }
 
-.Open {
+.open {
   transform: translateX(0);
 }
 
-.Close {
+.close {
   transform: translateX(-100%);
 }
 
-.SideDrawer-Logo {
+.logo {
   height: 10%;
   margin-bottom: 32px;
 }
