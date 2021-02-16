@@ -1,9 +1,9 @@
 import React from "react";
 import NavigationItem from "../NavigationItem/NavigationItem";
-import "./NavigationItems.css";
+import classes from "./NavigationItems.css";
 
 const navigationItems = (props) => (
-  <ul className="NavigationItems">
+  <ul className={classes.NavigationItems}>
     <NavigationItem link="/" active>
       Burger Builder
     </NavigationItem>
