@@ -5,6 +5,7 @@ import axios from "../../../axios-orders";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import { withRouter } from "react-router-dom";
 import Input from "../../../components/UI/Input/Input";
+import { connect } from "react-redux";
 
 class ContactData extends Component {
   state = {
@@ -167,7 +168,7 @@ class ContactData extends Component {
     }
 
     let form = !this.state.loading ? (
-      <form>
+      <form onSubmit={this.orderHandler}>
         {formElementsArray.map((formElement) => {
           return (
             <Input
@@ -200,5 +201,11 @@ class ContactData extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    ingredients: state.ingredients,
+    totalPrice: state.totalPrice,
+  };
+};
 
-export default withRouter(ContactData);
+export default connect(mapStateToProps)(withRouter(ContactData));
