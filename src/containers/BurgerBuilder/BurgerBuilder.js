@@ -8,26 +8,15 @@ import axios from "../../axios-orders";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import withErrorHandler from "../../hoc/withErrorHandler/WithErrorHandler";
 import { connect } from "react-redux";
-import * as burgerBuilderActions from "../../store/actions/index";
+import * as actions from "../../store/actions/index";
 
 class BurgerBuilder extends Component {
   state = {
     purchasing: false,
-    loading: false,
-    error: null,
   };
 
   componentDidMount() {
-    // axios
-    //   .get(
-    //     "https://burger-builder-k09-default-rtdb.firebaseio.com/ingredients.json"
-    //   )
-    //   .then((response) => {
-    //     this.setState({ ingredients: response.data });
-    //   })
-    //   .catch((error) => {
-    //     this.setState({ error: true });
-    //   });
+    this.props.onInitIngredients();
   }
 
   purchaseHandler = () => {
@@ -39,6 +28,7 @@ class BurgerBuilder extends Component {
   };
 
   purchaseContinueHandler = () => {
+    this.props.onInitPurchase();
     this.props.history.push("/checkout");
   };
 
@@ -60,11 +50,11 @@ class BurgerBuilder extends Component {
       disabledInfo[key] = disabledInfo[key] <= 0;
     }
     let orderSummary = null;
-    if (!this.state.loading | this.props.ingredients) {
+    if (this.props.ingredients) {
       orderSummary = <Spinner />;
     }
 
-    let burger = this.state.error ? <p>Cant load ingredients</p> : <Spinner />;
+    let burger = this.props.error ? <p>Cant load ingredients</p> : <Spinner />;
     if (this.props.ingredients) {
       burger = (
         <Aux>
@@ -104,17 +94,18 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    ingredients: state.ingredients,
-    totalPrice: state.totalPrice,
+    ingredients: state.burgerBuilder.ingredients,
+    totalPrice: state.burgerBuilder.totalPrice,
+    error: state.burgerBuilder.error,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAddIngredient: (igName) =>
-      dispatch(burgerBuilderActions.addIngredient(igName)),
-    onRemoveIngredient: (igName) =>
-      dispatch(burgerBuilderActions.removeIngredient(igName)),
+    onAddIngredient: (igName) => dispatch(actions.addIngredient(igName)),
+    onRemoveIngredient: (igName) => dispatch(actions.removeIngredient(igName)),
+    onInitIngredients: () => dispatch(actions.initIngredients()),
+    onInitPurchase: () => dispatch(actions.purchaseInit()),
   };
 };
 
