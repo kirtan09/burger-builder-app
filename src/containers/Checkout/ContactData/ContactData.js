@@ -7,6 +7,7 @@ import Input from "../../../components/UI/Input/Input";
 import { connect } from "react-redux";
 import withErrorHandler from "../../../hoc/withErrorHandler/WithErrorHandler";
 import * as actions from "../../../store/actions/index";
+import { updateObject, checkValidaty } from "../../../shared/utility";
 
 class ContactData extends Component {
   state = {
@@ -97,43 +98,12 @@ class ContactData extends Component {
     this.props.onPurchaseBurger(order, this.props.token);
   };
 
-  updateObject = (oldObject, updatedProperties) => {
-    return {
-      ...oldObject,
-      ...updatedProperties,
-    };
-  };
-
-  checkValidaty = (value, rules) => {
-    let isValid = true;
-
-    if (rules.required) {
-      isValid = value.trim() !== "" && isValid;
-    }
-    if (rules.minLength) {
-      isValid = value.length >= rules.minLength && isValid;
-    }
-    if (rules.maxLength) {
-      isValid = value.length <= rules.maxLength && isValid;
-    }
-    if (rules.isEmail) {
-      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-      isValid = pattern.test(value) && isValid;
-    }
-
-    if (rules.isNumeric) {
-      const pattern = /^\d+$/;
-      isValid = pattern.test(value) && isValid;
-    }
-    return isValid;
-  };
-
   inputChangedHandler = (event, inputIdentifier) => {
-    const updatedFormElement = this.updateObject(
+    const updatedFormElement = updateObject(
       this.state.orderForm[inputIdentifier],
       {
         value: event.target.value,
-        valid: this.checkValidaty(
+        valid: checkValidaty(
           event.target.value,
           this.state.orderForm[inputIdentifier].validation
         ),
@@ -141,7 +111,7 @@ class ContactData extends Component {
       }
     );
 
-    const updatedOrderForm = this.updateObject(this.state.orderForm, {
+    const updatedOrderForm = updateObject(this.state.orderForm, {
       [inputIdentifier]: updatedFormElement,
     });
 
