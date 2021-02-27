@@ -24,7 +24,7 @@ class Checkout extends Component {
           {purchasedRedirect}
           <CheckoutSummary
             ingredients={this.props.ingredients}
-            checkoutCanceled={this.checkoutCancelledHandler}
+            checkoutCancelled={this.checkoutCancelledHandler}
             checkoutContinued={this.checkoutContinuedHandler}
           />
           <Route
