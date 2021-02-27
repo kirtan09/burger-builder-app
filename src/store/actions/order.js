@@ -42,10 +42,11 @@ export const purchaseInit = () => {
   };
 };
 
-const fetchOrdersSuccess = (orders) => {
+const fetchOrdersSuccess = (orders, userId) => {
   return {
     type: actionTypes.FETCH_ORDERS_SUCCESS,
     orders: orders,
+    userId: userId,
   };
 };
 
@@ -62,17 +63,18 @@ const fetchOrdersStart = () => {
   };
 };
 
-export const fetchOrders = (token) => {
+export const fetchOrders = (token, userId) => {
   return (dispatch) => {
     dispatch(fetchOrdersStart());
+    const queryParams = `?auth=${token}&orderBy="userId"&equalTo="${userId}"`;
     axios
-      .get(`/orders.json?auth=${token}`)
+      .get(`/orders.json${queryParams}`)
       .then((response) => {
         const fetchedOrders = [];
         for (let key in response.data) {
           fetchedOrders.push({ ...response.data[key], id: key });
         }
-        dispatch(fetchOrdersSuccess(fetchedOrders));
+        dispatch(fetchOrdersSuccess(fetchedOrders, userId));
       })
       .catch((error) => {
         dispatch(fetchOrdersFail(error));
